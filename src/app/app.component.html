@@ -1,0 +1,11 @@
+<app-welcome-page-component *ngIf="changeComps" 
+(WelcomeToGameEvent)="recieveStatus($event)"
+(playerInfoEvent)="recievePlayerInfo($event)"
+(playerInfoEvent)="AddPlayerData($event)">
+</app-welcome-page-component>
+
+<app-game-page-component *ngIf="!changeComps" 
+(GameToWelcomeEvent)="recieveStatus($event)" 
+[playerInfo]="playerInfo" 
+[playerData]="playerData">
+</app-game-page-component>

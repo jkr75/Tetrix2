@@ -1,0 +1,67 @@
+
+table,
+th,
+td {
+	font-size: 20px;
+	font-weight: bold;
+	text-align: center;
+	color: rgb(47, 47, 47);
+    background: rgb(227, 225, 225);
+	padding: 15px 10px 15px 10px;
+	margin-left: auto;
+	margin-right: auto;
+	border: solid 1px;
+}
+button.green {
+	font-size: 15px;
+	font-weight: bold;
+	text-align: center;
+	padding: 5px 10px 5px 10px;
+    background: rgb(2, 185, 11);
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+button.red {
+	font-size: 15px;
+	font-weight: bold;
+	text-align: center;
+	padding: 5px 10px 5px 10px;
+    background: rgb(218, 61, 61);
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+button.yellow {
+	font-size: 15px;
+	font-weight: bold;
+	text-align: center;
+	padding: 5px 10px 5px 10px;
+    background: rgb(246, 223, 11);
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+button.gray {
+	font-size: 15px;
+	font-weight: bold;
+	text-align: center;
+	padding: 5px 10px 5px 10px;
+    background: rgb(161, 161, 160);
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+p {
+	font-size: 22px;
+	color: rgb(7, 113, 234);
+}
+  .example-viewport {
+	height: 200px;
+	width: 200px;
+	border: 1px solid black;
+  }
+  
+  .example-item-detail {
+	height: 18px;
+  }
+  
+  .example-alternate {
+	background: rgba(127, 127, 127, 0.3);
+  }

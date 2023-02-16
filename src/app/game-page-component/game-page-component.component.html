@@ -1,0 +1,42 @@
+<table width="65%">
+  <tr>
+    <td width="34%">Game Started: {{gameplayTimer}}s</td>
+    <td width="32%">Welcome to our Tetrix Game <br/>{{playerInfo.Name.toUpperCase()}} !</td>
+    <td width="34%">Point: {{pointCount}}</td>
+  </tr>
+  <tr>
+    <td>
+
+      <button *ngIf="!showS" class="gray" (click)="statS()">Show Gameplay</button>
+      <button *ngIf="showS" class="gray" (click)="statS()">Hide Gameplay</button>
+      
+      <div *ngIf="statS">
+        <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400" class="example-viewport">
+        <!-- <b>{{saveCurrentGameData.playerName}}</b> -->
+        <!-- <ol> -->
+          <!-- <li *ngFor="let item of saveCurrentGameData.gameHistory">{{item.Time}}s {{item.Action}}</li> -->
+          <div class="example-item-detail" *cdkVirtualFor="let item of saveCurrentGameData.gameHistory">{{item.Time}}s {{item.Action}}</div>
+        <!-- </ol> -->
+      </cdk-virtual-scroll-viewport>
+      </div>
+   
+    </td>
+    <td><tetris-core #game (foodEaten)="onFoodEaten()" (gameOver)="onGameOver()"></tetris-core></td>
+    <td>
+      <p *ngIf="isReady">Games Status: Ready!</p>
+      <p *ngIf="isGo">Games Status: Start!</p>
+      <p *ngIf="isPaused">Games Status: Stopped!</p>
+      <p *ngIf="isGameOver">Games Status: Reset to Save Data!</p>
+
+      <button [disabled]="!isGo" (click)="onLeftButton()" class="gray">Left</button>
+      <button [disabled]="!isGo" (click)="onRightButton()" class="gray">Right</button>
+      <button [disabled]="!isGo" (click)="onRotateButton()" class="gray">Rotate</button>
+      <button [disabled]="!isGo" (click)="onDownButton()" class="gray">Down</button><br>
+
+      <button [disabled]="isGameOver" (click)="onStartButton()" class="green">Start</button>
+      <button [disabled]="isGameOver || isReady" (click)="onStopButton()" class="red">Stop</button>
+      <button [disabled]="isReady" (click)="onResetButton()" class="yellow">Reset</button><br />
+
+      <button (click)="sendStatus()" class="gray">Exit Game</button>
+    </td>
+</table>

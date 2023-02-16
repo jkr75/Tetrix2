@@ -1,0 +1,24 @@
+body {
+	margin: auto;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	color: black;
+	background-image: url(background.jpg);
+	background-repeat: repeat-x;
+	text-align: center;
+}
+
+div {
+	padding: 10px 10px 10px 10px;
+}
+
+tetris-core.color-box {
+	background: #f00404;
+
+}
+
+tetris-core.tile {
+	background: white;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

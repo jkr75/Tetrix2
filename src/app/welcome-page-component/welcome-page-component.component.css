@@ -1,0 +1,32 @@
+p {
+	font-size: 12px;
+	background: rgb(255, 189, 189);
+	padding: 10px 0px 10px 0px;
+	border: 1px solid rgb(252, 2, 2);
+}
+
+input.ng-touched.ng-invalid {
+	border: 3px solid red;
+}
+
+form {
+	border: 3px solid rgb(10, 12, 86);
+	background: rgb(244, 239, 239);
+	font-weight: bold;
+	font-size: 20px;
+	text-align: center;
+	padding: 50px 50px 50px 50px;
+	margin-top: 10%;
+	margin-left: 33%;
+	margin-right: 33%;
+	border: solid 3px black;
+}
+
+input, button {
+	font-size: 15px;
+	font-weight: bold;
+	text-align: center;
+	padding: 5px 10px 5px 10px;
+	margin-bottom: 2px;
+	margin-top: 10px;
+}

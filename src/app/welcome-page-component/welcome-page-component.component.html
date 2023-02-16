@@ -1,0 +1,12 @@
+<form #playerForm="ngForm" (submit)="onSubmit(playerForm.form.value)">
+    <div>
+        <input ngModel placeholder="Login" type="text" [(ngModel)]="playerInfo.Name" name="Name" id="Name" #Name="ngModel"
+            minlength="3" required /><br />
+        <p *ngIf="Name.touched && Name.invalid">Login jest wymagany!</p>
+        <input ngModel placeholder="Adres e-mail" type="text" [(ngModel)]="playerInfo.Email" name="Email" #Email="ngModel"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required /><br />
+        <p *ngIf="Email.touched && Email.invalid">Adres e-mail jest nieprawidłowy!</p>
+        <button type="button" [disabled]="playerForm.valid === false" (click)="sendStatus(); sendPlayerInfo()">to game
+            page</button>
+    </div>
+</form>
