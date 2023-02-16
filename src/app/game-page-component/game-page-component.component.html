@@ -1,4 +1,4 @@
-<table width="65%">
+<table width="55%">
   <tr>
     <td width="34%">Game Started: {{gameplayTimer}}s</td>
     <td width="32%">Welcome to our Tetrix Game <br/>{{playerInfo.Name.toUpperCase()}} !</td>
@@ -29,9 +29,9 @@
       <p *ngIf="isGameOver">Games Status: Reset to Save Data!</p>
 
       <button [disabled]="!isGo" (click)="onLeftButton()" class="gray">Left</button>
-      <button [disabled]="!isGo" (click)="onRightButton()" class="gray">Right</button>
+      <button [disabled]="!isGo" (click)="onRightButton()" class="gray">Right</button><br/>
       <button [disabled]="!isGo" (click)="onRotateButton()" class="gray">Rotate</button>
-      <button [disabled]="!isGo" (click)="onDownButton()" class="gray">Down</button><br>
+      <button [disabled]="!isGo" (click)="onDownButton()" class="gray">Down</button><br/>
 
       <button [disabled]="isGameOver" (click)="onStartButton()" class="green">Start</button>
       <button [disabled]="isGameOver || isReady" (click)="onStopButton()" class="red">Stop</button>

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { Player } from '../welcome-page-component/welcome-page-component.component';
 import { TetrisCoreComponent } from 'ngx-tetris';
 
@@ -7,7 +7,6 @@ import { TetrisCoreComponent } from 'ngx-tetris';
   selector: 'app-game-page-component',
   templateUrl: './game-page-component.component.html',
   styleUrls: ['./game-page-component.component.css'],
- // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GamePageComponentComponent {
 
