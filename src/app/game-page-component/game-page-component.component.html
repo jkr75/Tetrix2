@@ -1,18 +1,17 @@
-<table width="55%">
+<table width="65%">
   <tr>
     <td width="34%">Game Started: {{gameplayTimer}}s</td>
-    <td width="32%">Welcome to our Tetrix Game <br/>{{playerInfo.Name.toUpperCase()}} !</td>
+    <td width="32%">Welcome to our Tetrix Game <br/> {{playerInfo.Name.toLowerCase()}}!</td>
     <td width="34%">Point: {{pointCount}}</td>
   </tr>
   <tr>
     <td>
 
-      <button *ngIf="!showS" class="gray" (click)="statS()">Show Gameplay</button>
-      <button *ngIf="showS" class="gray" (click)="statS()">Hide Gameplay</button>
+      <button type="submit" *ngIf="!showS" class="gray" (click)="statS()">Show Gameplay</button>
+      <button type="submit" *ngIf="showS" class="gray" (click)="statS()">Hide Gameplay</button>
       
       <div *ngIf="statS">
         <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400" class="example-viewport">
-          <!-- <div> Sort | Filtr (brak czasu ;-/ )</div> -->
         <!-- <b>{{saveCurrentGameData.playerName}}</b> -->
         <!-- <ol> -->
           <!-- <li *ngFor="let item of saveCurrentGameData.gameHistory">{{item.Time}}s {{item.Action}}</li> -->
@@ -22,22 +21,30 @@
       </div>
    
     </td>
-    <td><tetris-core #game (foodEaten)="onFoodEaten()" (gameOver)="onGameOver()"></tetris-core></td>
+
+    <!-- class="black-and-white" -->
+    
+    <td><tetris-core #game (foodEaten)="onFoodEaten()" (gameOver)="onGameOver()" [ngClass]="{
+      'normal-palette': selectedColors === 'normal', 
+      'black-and-white': selectedColors === 'high-contrast'
+    }"></tetris-core></td>
     <td>
       <p *ngIf="isReady">Games Status: Ready!</p>
       <p *ngIf="isGo">Games Status: Start!</p>
       <p *ngIf="isPaused">Games Status: Stopped!</p>
       <p *ngIf="isGameOver">Games Status: Reset to Save Data!</p>
 
-      <button [disabled]="!isGo" (click)="onLeftButton()" class="gray">Left</button>
-      <button [disabled]="!isGo" (click)="onRightButton()" class="gray">Right</button><br/>
-      <button [disabled]="!isGo" (click)="onRotateButton()" class="gray">Rotate</button>
-      <button [disabled]="!isGo" (click)="onDownButton()" class="gray">Down</button><br/>
+      <button type="submit" [disabled]="!isGo" (click)="onLeftButton()" class="gray">Left</button>
+      <button type="submit" [disabled]="!isGo" (click)="onRightButton()" class="gray">Right</button>
+      <button type="submit" [disabled]="!isGo" (click)="onRotateButton()" class="gray">Rotate</button>
+      <button type="submit" [disabled]="!isGo" (click)="onDownButton()" class="gray">Down</button><br>
 
-      <button [disabled]="isGameOver" (click)="onStartButton()" class="green">Start</button>
-      <button [disabled]="isGameOver || isReady" (click)="onStopButton()" class="red">Stop</button>
-      <button [disabled]="isReady" (click)="onResetButton()" class="yellow">Reset</button><br />
+      <button type="submit" [disabled]="isGameOver" (click)="onStartButton()" class="green">Start</button>
+      <button type="submit" [disabled]="isGameOver || isReady" (click)="onStopButton()" class="red">Stop</button>
+      <button type="submit" [disabled]="isReady" (click)="onResetButton()" class="yellow">Reset</button><br />
 
-      <button (click)="sendStatus()" class="gray">Exit Game</button>
+      <button type="submit" (click)="sendStatus()" class="gray" [routerLink]="['/welcome']">Exit Game</button>
+      <br /><br />
+      <button type="submit" class="gray" (click)="goToColors()">Zmiana koloru</button>
     </td>
 </table>

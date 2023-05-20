@@ -1,14 +1,18 @@
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild, OnInit, Injectable } from '@angular/core';
 import { Player } from '../welcome-page-component/welcome-page-component.component';
 import { TetrisCoreComponent } from 'ngx-tetris';
-
+import { StorageService } from '../storage.service';
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-game-page-component',
   templateUrl: './game-page-component.component.html',
   styleUrls: ['./game-page-component.component.css'],
 })
-export class GamePageComponentComponent {
+
+@Injectable()
+export class GamePageComponentComponent implements OnInit {
 
   @Input() playerInfo: Player;
   @Input() playerData: Array<Player>;
@@ -142,14 +146,30 @@ export class GamePageComponentComponent {
     this.saveCurrentGamePlay();
   }
 
-  constructor() {
+  public selectedColors: string = '';
+  
+  constructor(private _router: Router, private _storage: StorageService, private _route: ActivatedRoute) {
+
     this.playerInfo = {
-      Name: '',
-      Email: ''
+      Name: this._storage.readPlayerName(),
+      Email: '',
     }
+    
     this.playerData = [];
   }
+  goToColors(): void {
+    this._router.navigate(['/gry/:colors'], {
+      relativeTo: this._route
+    });
+  }
+
+  ngOnInit() { 
+    this._route.params.subscribe(params => {
+      this.selectedColors = params['colors']
+    })
+  }
 }
+
 export interface pAction {
   Time: number;
   Action: string;
