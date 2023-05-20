@@ -1,4 +1,7 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { StorageService } from '../storage.service';
+import { ActivatedRoute } from '@angular/router';
 
 interface FormData {
   Name: string;
@@ -8,15 +11,38 @@ interface FormData {
 @Component({
   selector: 'app-welcome-page-component',
   templateUrl: './welcome-page-component.component.html',
-  styleUrls: ['./welcome-page-component.component.css']
+  styleUrls: ['./welcome-page-component.component.css'],
 })
-export class WelcomePageComponentComponent {
+
+export class WelcomePageComponentComponent implements OnInit{
+
   @Output() public WelcomeToGameEvent = new EventEmitter<boolean>();
   @Output() public playerInfoEvent = new EventEmitter<Player>();
   @Output() public palyerDataEvent = new EventEmitter<Array<Player>>();
 
-  public onSubmit(data: FormData) {
-    console.log(data)
+  public ErrorAlert: boolean = false;
+
+  constructor(private _router: Router, private _storage: StorageService, private _route: ActivatedRoute) {
+    this._router.navigate(['/welcome']);
+
+  }
+
+  goToColors(): void {
+    this._router.navigate(['/gry/:colors'], {
+      relativeTo: this._route
+    });
+  }
+  
+  ngOnInit(): void {   
+  }
+
+  public changeErrorAlert(){
+    this.ErrorAlert =  false;
+  }
+
+  public onSubmit(Name: string) {
+    this._storage.setUserData(Name)
+    this._router.navigate(['/gry'])
   }
 
   public playerInfo: Player = {
@@ -27,8 +53,6 @@ export class WelcomePageComponentComponent {
   public playerData: Array<Player> = []
   public changeComps: boolean = true;
 
-  constructor() { }
-
   sendStatus() {
     this.changeComps = !this.changeComps,
       this.WelcomeToGameEvent.emit(this.changeComps)
@@ -37,10 +61,15 @@ export class WelcomePageComponentComponent {
   sendPlayerInfo() {
     this.playerInfoEvent.emit({
       Name: this.playerInfo.Name,
-      Email: this.playerInfo.Email
+      Email: this.playerInfo.Email,
     })
+
+  }
+  sendFormInfo(){
+    this._storage.setUserData(this.playerInfo.Name)
   }
 }
+
 export interface Player {
   Name: string,
   Email: string,
