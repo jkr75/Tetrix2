@@ -1,0 +1,57 @@
+body {
+	margin: auto;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	color: black;
+	background-image: url(background.jpg);
+	background-repeat: repeat-x;
+	text-align: center;
+}
+
+div {
+	padding: 10px 10px 10px 10px;
+}
+
+tetris-core.color-box {
+	background: #000000;
+
+}
+
+tetris-core.tile {
+	background: white;
+} 
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+tetris-core {
+	&.black-and-white {
+	  tile {
+		background: white;
+		&.color-box {
+		  background: #000000;
+		}
+		&.color-dot {
+		  background: #000000;
+		}
+		&.color-line {
+		  background: #000000;
+		}
+		&.color-t {
+		  background: #000000;
+		}
+		&.color-l {
+		  background: #000000;
+		}
+		&.color-lr {
+		  background: #000000;
+		}
+		&.color-z {
+		  background: #000000;
+		}
+		&.color-s {
+		  background: #000000;
+		}
+	  }
+	}
+  }
