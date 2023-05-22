@@ -157,8 +157,9 @@ export class GamePageComponentComponent implements OnInit {
     
     this.playerData = [];
   }
-  goToColors(): void {
-    this._router.navigate(['/gry/:colors'], {
+  
+  goToColors(){
+    this._router.navigate(['/gry', this.selectedColors], {
       relativeTo: this._route
     });
   }

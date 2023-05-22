@@ -23,11 +23,12 @@
     </td>
 
     <!-- class="black-and-white" -->
-    
-    <td><tetris-core #game (foodEaten)="onFoodEaten()" (gameOver)="onGameOver()" [ngClass]="{
-      'normal-palette': selectedColors === 'normal', 
+    <!-- [ngClass]="{
+      'normal-palette': selectedColors === 'normal-colors', 
       'black-and-white': selectedColors === 'high-contrast'
-    }"></tetris-core></td>
+    }" -->
+    
+    <td><tetris-core #game (foodEaten)="onFoodEaten()" (gameOver)="onGameOver()" class="{{this.selectedColors}}"></tetris-core></td>
     <td>
       <p *ngIf="isReady">Games Status: Ready!</p>
       <p *ngIf="isGo">Games Status: Start!</p>
