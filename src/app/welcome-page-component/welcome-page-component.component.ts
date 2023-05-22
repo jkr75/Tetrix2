@@ -29,12 +29,16 @@ export class WelcomePageComponentComponent implements OnInit {
 
   public selectedColors: string = '';
 
-  goToColors() {
+  public goToColors() {
     this.sendPlayerInfo();
-    console.log(this.selectedColors)
-    this._router.navigate(['/gry', this.selectedColors], {
-      relativeTo: this._route
-    });
+    console.log(this.selectedColors, 'welcome: ' + this.selectedColors)
+    if (this.selectedColors === 'normal_colors') {
+      this._router.navigate(['/gry', 'high_contrast'], {
+        relativeTo: this._route
+      })
+    } else {
+      this._router.navigate(['/gry', 'normal_colors'])
+    };
   }
 
   ngOnInit(): void {
