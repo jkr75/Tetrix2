@@ -20,6 +20,7 @@ export class AppComponent implements OnInit {
   }
 
   title = 'Tetrix';
+  
   public changeComps: boolean = true
   public playerInfo: Player = {
     Name: '',
