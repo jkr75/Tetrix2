@@ -10,16 +10,14 @@
         <p *ngIf="Email.touched && Email.invalid">Adres e-mail nieprawidłowy!</p>
         <br />
         <div>
-            <select id="selectedColors">
-                <option value="normal_colors">normal colors</option>
-                <option value="high_contrast">high contrast</option>
-            </select>
+                <select id="selectedColors" [(ngModel)]="selectedColors">
+                    <option value="normal_colors">normal colors</option>
+                    <option value="high_contrast">high contrast</option>
+                </select>
         </div>
-        <br />
-
-        <button type="button" [disabled]="playerForm.valid === false" (click)="sendStatus(); sendFormInfo(); goToColors()"
-            [routerLink]="['/gry']"
-            [ngClass]="playerForm.value.selectedColors==='normal_colors'?'btn btn-primary btn-lg':'btn btn-light btn-lg'">to
+<!-- (click)="goToColors(); sendStatus(); sendFormInfo()" [routerLink]="['/gry']" -->
+        <button type="button" [disabled]="playerForm.valid === false" (click)="goToColors(); sendStatus(); sendFormInfo()" 
+            [ngClass]="playerForm.value.selectedColors==='normal_colors'?'black-and-white':'normal-color'">to
             game page</button>
 
     </div>

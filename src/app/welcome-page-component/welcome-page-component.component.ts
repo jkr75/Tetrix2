@@ -26,9 +26,11 @@ export class WelcomePageComponentComponent implements OnInit{
     this._router.navigate(['/welcome']);
 
   }
+  
+ public selectedColors: string = '';
 
-  goToColors(): void {
-    this._router.navigate(['/gry/:colors'], {
+  goToColors(){
+    this._router.navigate(['/gry', this.selectedColors], {
       relativeTo: this._route
     });
   }
