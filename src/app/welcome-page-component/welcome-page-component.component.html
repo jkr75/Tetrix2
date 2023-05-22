@@ -16,8 +16,9 @@
                 </select>
         </div>
 <!-- (click)="goToColors(); sendStatus(); sendFormInfo()" [routerLink]="['/gry']" -->
-        <button type="button" [disabled]="playerForm.valid === false" (click)="goToColors(); sendStatus(); sendFormInfo()" 
-            [ngClass]="playerForm.value.selectedColors==='normal_colors'?'black-and-white':'normal-color'">to
+
+        <button type="button" [disabled]="playerForm.valid === false" (click)="onSubmitForm()" 
+            [ngClass]="playerForm.value.selectedColors==='high_contrast'?'black-and-white':'normal-palette'">to
             game page</button>
 
     </div>

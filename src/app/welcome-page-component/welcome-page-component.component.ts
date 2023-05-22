@@ -14,7 +14,7 @@ interface FormData {
   styleUrls: ['./welcome-page-component.component.css'],
 })
 
-export class WelcomePageComponentComponent implements OnInit{
+export class WelcomePageComponentComponent implements OnInit {
 
   @Output() public WelcomeToGameEvent = new EventEmitter<boolean>();
   @Output() public playerInfoEvent = new EventEmitter<Player>();
@@ -26,25 +26,33 @@ export class WelcomePageComponentComponent implements OnInit{
     this._router.navigate(['/welcome']);
 
   }
-  
- public selectedColors: string = '';
 
-  goToColors(){
+  public selectedColors: string = '';
+
+  goToColors() {
+    this.sendPlayerInfo();
+    console.log(this.selectedColors)
     this._router.navigate(['/gry', this.selectedColors], {
       relativeTo: this._route
     });
   }
-  
-  ngOnInit(): void {   
+
+  ngOnInit(): void {
   }
 
-  public changeErrorAlert(){
-    this.ErrorAlert =  false;
+  public changeErrorAlert() {
+    this.ErrorAlert = false;
   }
 
-  public onSubmit(Name: string) {
-    this._storage.setUserData(Name)
-    this._router.navigate(['/gry'])
+  public onSubmitForm() {
+    this.goToColors();
+    this.sendStatus();
+    this.sendFormInfo();
+  }
+
+  public onSubmit(formValue: FormData) {
+    this._storage.setUserData(formValue.Name);
+    // this._router.navigate(['/gry'])
   }
 
   public playerInfo: Player = {
@@ -67,7 +75,7 @@ export class WelcomePageComponentComponent implements OnInit{
     })
 
   }
-  sendFormInfo(){
+  sendFormInfo() {
     this._storage.setUserData(this.playerInfo.Name)
   }
 }
