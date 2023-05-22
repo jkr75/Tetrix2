@@ -147,27 +147,32 @@ export class GamePageComponentComponent implements OnInit {
   }
 
   public selectedColors: string = '';
-  
+
   constructor(private _router: Router, private _storage: StorageService, private _route: ActivatedRoute) {
 
     this.playerInfo = {
       Name: this._storage.readPlayerName(),
       Email: '',
     }
-    
+
     this.playerData = [];
   }
-  
-  goToColors(){
+
+  goToColors() {
     this._router.navigate(['/gry', this.selectedColors], {
       relativeTo: this._route
     });
   }
 
-  ngOnInit() { 
+  ngOnInit() {
     this._route.params.subscribe(params => {
-      this.selectedColors = params['colors']
-    })
+      if (params.hasOwnProperty('colors')) {
+        this.selectedColors = params['colors'];
+      } else {
+        this.selectedColors = 'normal_colors';
+      }
+      console.log(this.selectedColors);
+    });
   }
 }
 

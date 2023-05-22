@@ -28,7 +28,7 @@
       'black-and-white': selectedColors === 'high-contrast'
     }" -->
     
-    <td><tetris-core #game (foodEaten)="onFoodEaten()" (gameOver)="onGameOver()" class="{{this.selectedColors}}"></tetris-core></td>
+    <td><tetris-core #game (foodEaten)="onFoodEaten()" (gameOver)="onGameOver()" [ngClass]="selectedColors === 'normal_colors' ? 'normal-palette' : 'black-and-white'"></tetris-core></td>
     <td>
       <p *ngIf="isReady">Games Status: Ready!</p>
       <p *ngIf="isGo">Games Status: Start!</p>
@@ -44,7 +44,8 @@
       <button type="submit" [disabled]="isGameOver || isReady" (click)="onStopButton()" class="red">Stop</button>
       <button type="submit" [disabled]="isReady" (click)="onResetButton()" class="yellow">Reset</button><br />
 
-      <button type="submit" (click)="sendStatus()" class="gray" [routerLink]="['/welcome']">Exit Game</button>
+      <!-- (click)="sendStatus()"  -->
+      <button type="submit" class="gray" [routerLink]="['/welcome']">Exit Game</button>
       <br /><br />
       <button type="submit" class="gray" (click)="goToColors()">Zmiana koloru</button>
     </td>
