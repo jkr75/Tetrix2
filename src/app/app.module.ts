@@ -14,7 +14,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const routes: Routes = [
   { path: 'welcome', component: WelcomePageComponentComponent },
-  { path: 'gry', component: GamePageComponentComponent },
+  // { path: 'gry', component: GamePageComponentComponent },
+  { path: 'gry/:colors', component: GamePageComponentComponent },
   { path: '**', redirectTo: 'welcome' }
 ];
 
@@ -34,9 +35,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     HttpClientModule
   ],
-  exports: [
-    RouterModule
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
