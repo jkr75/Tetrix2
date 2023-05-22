@@ -148,7 +148,7 @@ export class GamePageComponentComponent implements OnInit {
 
   public selectedColors: string = '';
 
-  constructor(private _router: Router, private _storage: StorageService, private _route: ActivatedRoute) {
+  constructor(private router: Router, private _storage: StorageService, private _route: ActivatedRoute) {
 
     this.playerInfo = {
       Name: this._storage.readPlayerName(),
@@ -158,10 +158,15 @@ export class GamePageComponentComponent implements OnInit {
     this.playerData = [];
   }
 
-  goToColors() {
-    this._router.navigate(['/gry', this.selectedColors], {
-      relativeTo: this._route
-    });
+  goToColors(selectedColors: string) {
+    console.log(this.selectedColors, 'gry: ' + this.selectedColors)
+    if (selectedColors === 'normal_colors') {
+      this.router.navigate(['/gry', 'high_contrast'], {
+        relativeTo: this._route
+      })
+    } else {
+      this.router.navigate(['/gry', 'normal_colors'])
+    };
   }
 
   ngOnInit() {
