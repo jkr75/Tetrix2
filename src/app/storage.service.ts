@@ -1,4 +1,5 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
+import { PlayerDataService } from './player-data.service';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -6,9 +7,13 @@ import { Injectable } from '@angular/core';
 })
 
 export class StorageService {
-  public _name: string = '';
 
-  constructor(private _http: HttpClient) { }
+  constructor(
+    private _http: HttpClient,
+    private _playerData: PlayerDataService,
+    ) { }
+
+public _name: string = '';
 
   public setUserData(Name: string){
     this._name = Name;
@@ -16,6 +21,10 @@ export class StorageService {
 
   public readPlayerName(){
     return this._name;
+  }
+
+  public load(){
+    
   }
 
 }

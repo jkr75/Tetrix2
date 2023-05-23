@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: 'welcome', component: WelcomePageComponentComponent },
   // { path: 'gry', component: GamePageComponentComponent },
   { path: 'gry/:colors', component: GamePageComponentComponent },
-  { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
+  { path: '**', redirectTo: 'welcome' }
 ]
 
 @NgModule({

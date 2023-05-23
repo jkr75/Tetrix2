@@ -12,6 +12,7 @@ import { GamePageComponentComponent } from './game-page-component/game-page-comp
 import { WelcomePageComponentComponent } from './welcome-page-component/welcome-page-component.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ColorService } from './color.service';
+import { PlayerDataService } from './player-data.service';
 
 const routes: Routes = [
   { path: 'welcome', component: WelcomePageComponentComponent },
@@ -37,7 +38,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     HttpClientModule
   ],
-  providers: [ColorService],
+  providers: [ColorService, PlayerDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -9,36 +9,35 @@ import { StorageService } from './storage.service';
   styleUrls: ['./app.component.scss'],
   providers: [StorageService]
 })
-
 export class AppComponent implements OnInit {
 
   constructor(
     private _router: Router, 
-    private _storage: StorageService
-    ) { 
+  ) { 
     this._router.navigate(['/welcome']);
   }
 
   title = 'Tetrix';
   
-  public changeComps: boolean = true
+  public changeComps: boolean = true;
   public playerInfo: Player = {
     Name: '',
     Email: '',
-  }
-  public playerData: Array<Player> = []
-  recieveStatus($event: any) {
+  };
+  public playerData: Array<Player> = [];
+
+  receiveStatus($event: any) {
     this.changeComps = $event;
   }
-  recievePlayerInfo($event: Player) {
+
+  receivePlayerInfo($event: Player) {
     this.playerInfo = $event;
   }
 
-  AddPlayerData($event: Player) {
-    this.playerData.push($event)
+  addPlayerData($event: Player) {
+    this.playerData.push($event);
   }
   
-  ngOnInit(): void{
+  ngOnInit(): void {
   }
-
 }
