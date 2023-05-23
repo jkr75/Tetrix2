@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -11,6 +11,7 @@ import { TetrisCoreModule } from 'ngx-tetris';
 import { GamePageComponentComponent } from './game-page-component/game-page-component.component';
 import { WelcomePageComponentComponent } from './welcome-page-component/welcome-page-component.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ColorService } from './color.service';
 
 const routes: Routes = [
   { path: 'welcome', component: WelcomePageComponentComponent },
@@ -23,11 +24,12 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     GamePageComponentComponent,
-    WelcomePageComponentComponent
+    WelcomePageComponentComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     TetrisCoreModule,
     BrowserAnimationsModule,
     ScrollingModule,
@@ -35,7 +37,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     HttpClientModule
   ],
-  providers: [],
+  providers: [ColorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
