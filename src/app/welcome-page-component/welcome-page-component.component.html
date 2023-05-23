@@ -1,24 +1,21 @@
-<form #playerForm="ngForm" (submit)="onSubmit(playerForm.form.value)">
+<form [formGroup]="playerForm" (ngSubmit)="onSubmitForm()">
     <div>
-        <div>Welcome to TETRIX WORLD!</div>
-        <input ngModel placeholder="Login" type="text" [(ngModel)]="playerInfo.Name" name="Name" id="Name"
-            #Name="ngModel" minlength="3" required /><br />
-        <p *ngIf="Name.touched && Name.invalid">Login wymagany!</p>
-
-        <input ngModel placeholder="Adres e-mail" type="text" [(ngModel)]="playerInfo.Email" name="Email"
-            #Email="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required /><br />
-        <p *ngIf="Email.touched && Email.invalid">Adres e-mail nieprawidłowy!</p>
-        <br />
-        <div>
-            <select id="selectedColors" [(ngModel)]="selectedColors" name="selectedColors">
-                <option value="normal_colors">normal colors</option>
-                <option value="high_contrast">high contrast</option>
-            </select>
-        </div>
-        <!-- (click)="goToColors(); sendStatus(); sendFormInfo()" [routerLink]="['/gry']" -->
-        <button type="button" [disabled]="playerForm.valid === false" (click)="onSubmitForm()"
-            [ngClass]="playerForm.value.selectedColors==='high_contrast'?'black-and-white':''">to
-            game page</button>
-
+      <div>Welcome to TETRIX WORLD!</div>
+      <input formControlName="Name" placeholder="Login" type="text" /><br />
+      <p *ngIf="playerForm.get('Name')?.invalid && playerForm.get('Name')?.touched">Login wymagany!</p>
+  
+      <input formControlName="Email" placeholder="Adres e-mail" type="text" /><br />
+      <p *ngIf="playerForm.get('Email')?.invalid && playerForm.get('Email')?.touched">Adres e-mail nieprawidłowy!</p>
+  
+      <br />
+      <div>
+        <label for="selectedColors">Choose a colors:</label>
+        <select formControlName="selectedColors" id="selectedColors">
+          <option value="normal_colors" selected="selected">normal colors</option>
+          <option value="high_contrast">high contrast</option>
+        </select>
+      </div>
+  
+      <button type="submit" [disabled]="playerForm.invalid || playerForm.pending">to game page</button>
     </div>
 </form>
