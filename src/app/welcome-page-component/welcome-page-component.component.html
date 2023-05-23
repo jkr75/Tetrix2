@@ -1,21 +1,23 @@
 <form [formGroup]="playerForm" (ngSubmit)="onSubmitForm()">
+  <div>
+    <div>Welcome to TETRIX WORLD!</div>
+    <input formControlName="Name" placeholder="Login" type="text" /><br />
+    <p *ngIf="playerForm.get('Name')?.invalid && playerForm.get('Name')?.touched">Login wymagany (min 5)!</p>
+    
+    <input formControlName="Email" placeholder="Adres e-mail" type="text" /><br />
+    <p *ngIf="playerForm.get('Email')?.invalid && playerForm.get('Email')?.touched">Adres e-mail nieprawidłowy!</p>
+
+    <!-- <input formControlName="Token" placeholder="Student ID" type="text" /><br />
+    <p *ngIf="playerForm.get('Token')?.invalid && playerForm.get('Token')?.touched">Student ID (min 4 cyfry)!</p> -->
+
     <div>
-      <div>Welcome to TETRIX WORLD!</div>
-      <input formControlName="Name" placeholder="Login" type="text" /><br />
-      <p *ngIf="playerForm.get('Name')?.invalid && playerForm.get('Name')?.touched">Login wymagany!</p>
-  
-      <input formControlName="Email" placeholder="Adres e-mail" type="text" /><br />
-      <p *ngIf="playerForm.get('Email')?.invalid && playerForm.get('Email')?.touched">Adres e-mail nieprawidłowy!</p>
-  
-      <br />
-      <div>
-        <label for="selectedColors">Choose a colors:</label>
-        <select formControlName="selectedColors" id="selectedColors">
-          <option value="normal_colors" selected="selected">normal colors</option>
-          <option value="high_contrast">high contrast</option>
-        </select>
-      </div>
-  
-      <button type="submit" [disabled]="playerForm.invalid || playerForm.pending">to game page</button>
+      <label for="selectedColors">Choose a colors:</label>
+      <select formControlName="selectedColors" id="selectedColors">
+        <option value="normal_colors" selected="selected">normal colors</option>
+        <option value="high_contrast">high contrast</option>
+      </select>
     </div>
+
+    <button type="submit" [disabled]="playerForm.invalid || playerForm.pending">to game page</button>
+  </div>
 </form>

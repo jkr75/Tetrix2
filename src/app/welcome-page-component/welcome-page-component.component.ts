@@ -2,7 +2,10 @@ import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 import { ActivatedRoute } from '@angular/router';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
+import { PlayerDataService } from '../player-data.service';
+import { HttpClient } from '@angular/common/http';
+import { ColorService } from '../color.service';
 
 interface FormData {
   Name: string;
@@ -16,7 +19,7 @@ interface FormData {
 })
 export class WelcomePageComponentComponent implements OnInit {
   playerForm: FormGroup;
-  selectedColors: string = 'normal_colors';
+  public selectedColors: string = '';
 
   @Output() public WelcomeToGameEvent = new EventEmitter<boolean>();
   @Output() public playerInfoEvent = new EventEmitter<Player>();
@@ -28,29 +31,43 @@ export class WelcomePageComponentComponent implements OnInit {
     private _router: Router,
     private _storage: StorageService,
     private _route: ActivatedRoute,
-    private _fb: FormBuilder
+    private _fb: FormBuilder,
+    private _playerDataService: PlayerDataService,
+    private _http: HttpClient,
+    private colorService: ColorService,
   ) {
     this._router.navigate(['/welcome']);
     this.playerForm = this._fb.group({
-      Name: ['', [Validators.required, Validators.minLength(3)]],
-      Email: ['', [Validators.required, Validators.email]],
+      Name: ['', [Validators.required, Validators.minLength(5)]],
+      // Token: ['', [Validators.required, Validators.minLength(4)]],
+      Email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
       selectedColors: ['normal_colors'],
     });
   }
 
-  public goToColors() {
-    this.sendPlayerInfo();
-    console.log(this.selectedColors, 'welcome: ' + this.selectedColors);
-    if (this.selectedColors === 'normal_colors') {
+  public goToColors(selectedColors: string) {
+    this.colorService.selectedColors = selectedColors;
+    console.log(selectedColors, 'welcome: ' + selectedColors);
+    if (selectedColors === 'normal_colors') {
       this._router.navigate(['/gry', 'normal_colors'], {
         relativeTo: this._route,
+        queryParams: {
+          colors: selectedColors
+        }
       });
     } else {
-      this._router.navigate(['/gry', 'high_contrast']);
+      this._router.navigate(['/gry', 'high_contrast'], {
+        relativeTo: this._route,
+        queryParams: {
+          colors: selectedColors
+        }
+      });
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit() {
+    this.selectedColors = this.colorService.selectedColors;
+  }
 
   public changeErrorAlert() {
     this.ErrorAlert = false;
@@ -59,14 +76,27 @@ export class WelcomePageComponentComponent implements OnInit {
   public onSubmitForm() {
     if (this.playerForm.valid) {
       const formValue = this.playerForm.value;
+      const selectedColors = this.playerForm.value.selectedColors;
+      this._router.navigate(['/game', selectedColors]);
       console.log(formValue);
-      this.goToColors();
+      this.goToColors(selectedColors);
       this.sendStatus();
       this.sendFormInfo();
       this._storage.setUserData(formValue.Name);
+      this._playerDataService.setPlayerData(formValue);
+      // if (formValue.Token) {
+      //   this._http.post('http://localhost:4200/check-token', { Token: formValue.Token }).subscribe(
+      //     (response) => {
+      //       console.log('Token jest poprawny');
+      //     },
+      //     (error) => {
+      //       console.error('Nieprawidłowy token:', error);
+      //     }
+      //   );
+      // }
     }
   }
-  
+
   public playerInfo: Player = {
     Name: '',
     Email: '',
@@ -95,5 +125,4 @@ export class WelcomePageComponentComponent implements OnInit {
 export interface Player {
   Name: string;
   Email: string;
-  pAction?: object;
 }
