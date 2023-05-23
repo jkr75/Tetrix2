@@ -4,6 +4,7 @@ import { TetrisCoreComponent } from 'ngx-tetris';
 import { StorageService } from '../storage.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import { ColorService } from '../color.service';
 
 @Component({
   selector: 'app-game-page-component',
@@ -148,8 +149,13 @@ export class GamePageComponentComponent implements OnInit {
 
   public selectedColors: string = '';
 
-  constructor(private router: Router, private _storage: StorageService, private _route: ActivatedRoute) {
-
+  constructor(
+    private router: Router, 
+    private _storage: StorageService, 
+    private _route: ActivatedRoute, 
+    private colorService: ColorService
+    ) {
+    this.selectedColors = colorService.selectedColors;
     this.playerInfo = {
       Name: this._storage.readPlayerName(),
       Email: '',
@@ -157,8 +163,9 @@ export class GamePageComponentComponent implements OnInit {
 
     this.playerData = [];
   }
-
+ 
   goToColors(selectedColors: string) {
+    this.colorService.selectedColors = this.selectedColors;
     console.log(this.selectedColors, 'gry: ' + this.selectedColors)
     if (selectedColors === 'normal_colors') {
       this.router.navigate(['/gry', 'high_contrast'], {

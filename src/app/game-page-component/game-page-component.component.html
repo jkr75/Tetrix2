@@ -10,7 +10,7 @@
       <button type="submit" *ngIf="!showS" class="gray" (click)="statS()">Show Gameplay</button>
       <button type="submit" *ngIf="showS" class="gray" (click)="statS()">Hide Gameplay</button>
       
-      <div *ngIf="showS">
+      <div *ngIf="statS">
         <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400" class="example-viewport">
         <!-- <b>{{saveCurrentGameData.playerName}}</b> -->
         <!-- <ol> -->
@@ -28,7 +28,7 @@
       'black-and-white': selectedColors === 'high-contrast'
     }" -->
     
-    <td><tetris-core #game (foodEaten)="onFoodEaten()" (gameOver)="onGameOver()" [ngClass]="selectedColors === 'normal_colors' ? 'normal-palette' : 'black-and-white'"></tetris-core></td>
+    <td><tetris-core #game (foodEaten)="onFoodEaten()" (gameOver)="onGameOver()" [ngClass]="selectedColors === 'normal_colors' ? '' : 'black-and-white'"></tetris-core></td>
     <td>
       <p *ngIf="isReady">Games Status: Ready!</p>
       <p *ngIf="isGo">Games Status: Start!</p>
@@ -47,6 +47,7 @@
       <!-- (click)="sendStatus()"  -->
       <button type="submit" class="gray" [routerLink]="['/welcome']">Exit Game</button>
       <br /><br />
-      <button type="button" class="gray" (click)="goToColors(selectedColors)">Zmiana koloru</button>
+      <button *ngIf="selectedColors==='high_contrast'" class="btn btn-primary col-3 btn-lg" type="button" (click)="goToColors(selectedColors)">Swap to Colors</button>
+      <button *ngIf="selectedColors==='normal_colors'" class="retroBtn contrast" type="button" (click)="goToColors(selectedColors)">Swap to Black&White</button>
     </td>
 </table>
