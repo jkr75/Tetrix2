@@ -1,22 +1,28 @@
-<table width="65%">
+<table width="85%">
   <tr>
-    <td width="34%">Game Started: {{gameplayTimer}}s</td>
-    <td width="32%">Welcome to our Tetrix Game <br/> {{playerInfo.Name.toLowerCase()}}!</td>
-    <td width="34%">Point: {{pointCount}}</td>
+    <td width="25%">Game Started: {{gameplayTimer}}s</td>
+    <td width="25%">Welcome to our Tetrix Game <br> {{playerInfo.Name.toLowerCase()}}!</td>
+    <td width="25%">Point: {{pointCount}}</td>
+    <td width="25%">Player scores:</td>
+
   </tr>
   <tr>
     <td>
-      <button type="submit" *ngIf="!showS" class="gray" (click)="statS()">Show Gameplay</button>
-      <button type="submit" *ngIf="showS" class="gray" (click)="statS()">Hide Gameplay</button>
-      
-      <div *ngIf="showS">
-        <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400" class="example-viewport">
-          <div class="example-item-detail" *cdkVirtualFor="let item of saveCurrentGameData.gameHistory">{{item.Time}}s {{item.Action}}</div>
+
+      <button type="submit" *ngIf="!showS" class="gray" (click)="showGameplay()">Show Gameplay</button>
+      <button type="submit" *ngIf="showS" class="gray" (click)="hideGameplay()">Hide Gameplay</button>
+
+      <div *ngIf="!showS">
+        <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="180" maxBufferPx="400" class="example-viewport">
+          <div class="example-item-detail" *cdkVirtualFor="let item of saveCurrentGameData.gameHistory">{{item.Time}}s
+            {{item.Action}}</div>
         </cdk-virtual-scroll-viewport>
       </div>
+
     </td>
     <td>
-      <tetris-core #game (foodEaten)="onFoodEaten()" (gameOver)="onGameOver()" [ngClass]="selectedColors === 'normal_colors' ? '' : 'black-and-white'"></tetris-core>
+      <tetris-core #game (foodEaten)="onFoodEaten()" (gameOver)="onGameOver()"
+        [ngClass]="selectedColors === 'normal_colors' ? '' : 'black-and-white'"></tetris-core>
     </td>
     <td>
       <p *ngIf="isReady">Games Status: Ready!</p>
@@ -35,8 +41,19 @@
 
       <button type="submit" class="gray" [routerLink]="['/welcome']">Exit Game</button>
       <br /><br />
-      <button *ngIf="selectedColors==='high_contrast'" class="btn btn-primary col-3 btn-lg" type="button" (click)="goToColors(selectedColors)">Swap to Colors</button>
-      <button *ngIf="selectedColors==='normal_colors'" class="retroBtn contrast" type="button" (click)="goToColors(selectedColors)">Swap to Black&White</button>
+      <button *ngIf="selectedColors==='high_contrast'" class="btn btn-primary col-3 btn-lg" type="button"
+        (click)="goToColors(selectedColors)">Swap to Colors</button>
+      <button *ngIf="selectedColors==='normal_colors'" class="retroBtn contrast" type="button"
+        (click)="goToColors(selectedColors)">Swap to Black&White</button>
     </td>
-  </tr>
+    <td>
+      <div>
+        <button (click)="toggleSortOrder()">Toggle Sort Order</button>
+          <ul>
+            <li *ngFor="let score of playerScores">
+              {{ score.name }} - {{ score.score }}
+            </li>
+          </ul>
+        </div>
+    </td>
 </table>
