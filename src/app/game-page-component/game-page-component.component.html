@@ -44,16 +44,18 @@
       <button *ngIf="selectedColors==='high_contrast'" class="btn btn-primary col-3 btn-lg" type="button"
         (click)="goToColors(selectedColors)">Swap to Colors</button>
       <button *ngIf="selectedColors==='normal_colors'" class="retroBtn contrast" type="button"
-        (click)="goToColors(selectedColors)">Swap to Black&White</button>
+        (click)="goToColors(selectedColors)">Swap to Black&White</button><br><br><br><br><br><br><br><br><br><br>
+        Aktualny czas: {{ currentTime | date:'mediumTime' }}
     </td>
     <td>
       <div>
-        <button (click)="toggleSortOrder()">Toggle Sort Order</button>
           <ul>
             <li *ngFor="let score of playerScores">
               {{ score.name }} - {{ score.score }}
             </li>
           </ul>
+          <button (click)="toggleSortOrder()">Sort: {{ sortOrder === 'asc' ? 'ascending' : 'descending' }}</button>
+          
         </div>
     </td>
 </table>

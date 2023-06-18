@@ -16,6 +16,7 @@ import { Player } from '../welcome-page-component/welcome-page-component.compone
 
 export class GamePageComponentComponent implements OnInit {
   public selectedColors: string = '';
+  public currentTime: Date | null = null;
   playerName: string = '';
   playerScores: { name: string, score: string }[] = [];
   sortOrder: 'asc' | 'desc' = 'asc';
@@ -227,6 +228,12 @@ export class GamePageComponentComponent implements OnInit {
       this.fetchPlayerScores();
     }, 30000);
    this.fetchPlayerScores();
+
+   this.updateTime();
+    setInterval(() => {
+      this.updateTime();
+    }, 30000);
+
   }
 
   fetchPlayerScores() {
@@ -275,7 +282,15 @@ export class GamePageComponentComponent implements OnInit {
   toggleSortOrder() {
     this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
     this.sortScores();
-    console.log('sort ???')
+    console.log('sort działa?')
+  }
+
+  sprawdzDaneGracza(): boolean {
+    return this.playerScores.length > 0;
+  }
+
+  private updateTime(): void {
+    this.currentTime = new Date();
   }
 }
   
