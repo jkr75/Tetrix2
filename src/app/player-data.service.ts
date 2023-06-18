@@ -5,6 +5,11 @@ import { Injectable } from '@angular/core';
 })
 export class PlayerDataService {
   private playerData: any;
+  public showS: boolean = true;
+
+  constructor() {
+    this.playerData = {};
+  }
 
   setPlayerData(data: any) {
     this.playerData = data;
@@ -14,3 +19,5 @@ export class PlayerDataService {
     return this.playerData;
   }
 }
+
+// public showS: boolean = true;

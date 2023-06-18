@@ -12,17 +12,17 @@ import { StorageService } from './storage.service';
 export class AppComponent implements OnInit {
 
   constructor(
-    private _router: Router, 
-  ) { 
+    private _router: Router,
+  ) {
     this._router.navigate(['/welcome']);
   }
 
   title = 'Tetrix';
-  
+
   public changeComps: boolean = true;
   public playerInfo: Player = {
     Name: '',
-    Email: '',
+    // Email: '',
   };
   public playerData: Array<Player> = [];
 
@@ -37,7 +37,7 @@ export class AppComponent implements OnInit {
   addPlayerData($event: Player) {
     this.playerData.push($event);
   }
-  
+
   ngOnInit(): void {
   }
 }

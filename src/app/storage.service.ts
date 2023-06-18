@@ -1,4 +1,4 @@
-import { HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { PlayerDataService } from './player-data.service';
 import { Injectable } from '@angular/core';
 
@@ -11,20 +11,25 @@ export class StorageService {
   constructor(
     private _http: HttpClient,
     private _playerData: PlayerDataService,
-    ) { }
+  ) { }
 
-public _name: string = '';
+  public getAuthToken(): string | null {
+    const authToken = localStorage.getItem('authToken');
+    return authToken;
+  }
 
-  public setUserData(Name: string){
+  getPlayerName(): string {
+    return localStorage.getItem('playerName') || '';
+  }
+
+  public _name: string = '';
+
+  public setUserData(Name: string) {
     this._name = Name;
   }
 
-  public readPlayerName(){
+  public readPlayerName() {
     return this._name;
-  }
-
-  public load(){
-    
   }
 
 }
