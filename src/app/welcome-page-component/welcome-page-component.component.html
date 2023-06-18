@@ -2,14 +2,16 @@
   <div>
     <div>Welcome to TETRIX WORLD!</div>
     <input formControlName="Name" placeholder="Login" type="text" /><br />
-    <p *ngIf="playerForm.get('Name')?.invalid && playerForm.get('Name')?.touched">Login wymagany (min 5)!</p>
+    <p *ngIf="playerForm.get('Name')?.invalid && playerForm.get('Name')?.touched">login required (min 5)!</p>
     
-    <input formControlName="Email" placeholder="Adres e-mail" type="text" /><br />
-    <p *ngIf="playerForm.get('Email')?.invalid && playerForm.get('Email')?.touched">Adres e-mail nieprawidłowy!</p>
+    <!-- <input formControlName="Email" placeholder="Adres e-mail" type="text" /><br />
+    <p *ngIf="playerForm.get('Email')?.invalid && playerForm.get('Email')?.touched">Adres e-mail nieprawidłowy!</p> -->
 
-    <!-- <input formControlName="Token" placeholder="Student ID" type="text" /><br />
-    <p *ngIf="playerForm.get('Token')?.invalid && playerForm.get('Token')?.touched">Student ID (min 4 cyfry)!</p> -->
-
+    <input formControlName="Token" placeholder="Student ID" type="text" /><br />
+    <ng-container *ngIf="playerForm.get('Token')?.invalid && playerForm.get('Token')?.touched">
+      <ng-container *ngTemplateOutlet="tokenError"></ng-container>
+    </ng-container>
+    
     <div>
       <label for="selectedColors">Choose a colors:</label>
       <select formControlName="selectedColors" id="selectedColors">
@@ -17,7 +19,13 @@
         <option value="high_contrast">high contrast</option>
       </select>
     </div>
+    <!-- routerLink="/gry" -->
 
-    <button type="submit" [disabled]="playerForm.invalid || playerForm.pending">to game page</button>
+    <button type="submit" [disabled]="playerForm.invalid || playerForm.pending" >to game page</button>
   </div>
+
+  <ng-template #tokenError>
+    <p *ngIf="playerForm.get('Token')?.errors?.['pattern']">Student ID should contain only digits.</p>
+    <p *ngIf="playerForm.get('Token')?.errors?.['minlength']">Student ID should have at least 4 digits.</p>
+  </ng-template>
 </form>
