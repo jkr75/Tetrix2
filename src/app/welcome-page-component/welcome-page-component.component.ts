@@ -66,7 +66,10 @@ export class WelcomePageComponentComponent implements OnInit {
     }
   }
   
-
+  onEnterPage(): void {
+    this._playerDataService.wyczyscDaneGracza()
+  }
+  
   ngOnInit() {
     this.selectedColors = this._colorService.selectedColors;
     this.playerForm = this._fb.group({
