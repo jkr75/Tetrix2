@@ -4,7 +4,10 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class PlayerDataService {
+
   private playerData: any;
+  private hasPlayerData: boolean = false;
+
   public showS: boolean = true;
 
   constructor() {
@@ -17,6 +20,14 @@ export class PlayerDataService {
 
   getPlayerData() {
     return this.playerData;
+  }
+
+  sprawdzDaneGracza(): boolean {
+    return this.hasPlayerData;
+  }
+
+  wyczyscDaneGracza(): void {
+    this.hasPlayerData = false;
   }
 }
 
