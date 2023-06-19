@@ -13,6 +13,8 @@ import { WelcomePageComponentComponent } from './welcome-page-component/welcome-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ColorService } from './color.service';
 import { PlayerDataService } from './player-data.service';
+import { SortPipe } from './sort.pipe';
+import { FilterPipe } from './filter.pipe';
 
 const routes: Routes = [
   { path: 'welcome', component: WelcomePageComponentComponent },
@@ -26,6 +28,8 @@ const routes: Routes = [
     AppComponent,
     GamePageComponentComponent,
     WelcomePageComponentComponent,
+    SortPipe,
+    FilterPipe,
   ],
   imports: [
     BrowserModule,
