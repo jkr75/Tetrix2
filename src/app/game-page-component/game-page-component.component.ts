@@ -8,6 +8,7 @@ import { ColorService } from '../color.service';
 import { PlayerDataService } from '../player-data.service';
 import { Player } from '../welcome-page-component/welcome-page-component.component';
 
+
 @Component({
   selector: 'app-game-page-component',
   templateUrl: './game-page-component.component.html',
@@ -20,6 +21,7 @@ export class GamePageComponentComponent implements OnInit {
   playerName: string = '';
   playerScores: { name: string, score: string }[] = [];
   sortOrder: 'asc' | 'desc' = 'asc';
+  searchText: string = '';
 
   @Input() playerInfo: Player;
   @Input() playerData: Array<Player>;
@@ -239,28 +241,19 @@ export class GamePageComponentComponent implements OnInit {
   fetchPlayerScores() {
     const authToken = this._storage.getAuthToken();
     const httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json', 'auth-token': authToken !== null ? authToken : '' })
+      headers: new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'auth-token': authToken !== null ? authToken : '',
+        'Accept': 'application/json'
+      }),
+      responseType: 'json' as const
     };
   
-    this._http.get('http://scores.chrum.it/scores', { ...httpOptions, responseType: 'text' })
+    this._http.get<{ name: string, score: string }[]>('http://scores.chrum.it/scores', httpOptions)
       .subscribe(
-        (response: any) => {
-          const parser = new DOMParser();
-          const htmlDocument = parser.parseFromString(response, 'text/html');
-          const tableRows = htmlDocument.querySelectorAll('table tr');
-          const playerScores: { name: string, score: string }[] = [];
-
-          tableRows.forEach((row) => {
-            const rowData = row.querySelectorAll('td');
-            const playerName = rowData[0].textContent;
-            const score = rowData[1].textContent;
-  
-            if (playerName && score) {
-              playerScores.push({ name: playerName, score: score });
-            }
-          });
-  
-          this.playerScores = playerScores.filter(score => score.name );
+        (response: { name: string, score: string }[]) => {
+          const playerScores = response.filter(score => score.name );
+          this.playerScores = playerScores;
           this.sortScores();
           console.log('Player scores:', this.playerScores);
         },
@@ -270,7 +263,7 @@ export class GamePageComponentComponent implements OnInit {
         }
       );
   }
-
+  
   sortScores() {
     if (this.sortOrder === 'asc') {
       this.playerScores.sort((a, b) => parseInt(a.score) - parseInt(b.score));
