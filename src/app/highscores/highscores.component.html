@@ -1,0 +1,9 @@
+<div>
+    Filter: <input type="text" [(ngModel)]="searchText" placeholder="Wyszukaj..." /><button (click)="toggleSortOrder()">Sort: {{ sortOrder === 'asc' ? 'asc' : 'desc' }}</button>
+    <ul>
+      <li *ngFor="let item of scores | filter: searchText | sort: sortOrder">
+        {{ item.name }} - {{ item.score }}
+      </li>
+    </ul>
+  </div>
+  
