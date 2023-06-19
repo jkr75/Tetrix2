@@ -15,6 +15,7 @@ import { ColorService } from './color.service';
 import { PlayerDataService } from './player-data.service';
 import { SortPipe } from './sort.pipe';
 import { FilterPipe } from './filter.pipe';
+import { HighscoresComponent } from './highscores/highscores.component';
 
 const routes: Routes = [
   { path: 'welcome', component: WelcomePageComponentComponent },
@@ -30,6 +31,7 @@ const routes: Routes = [
     WelcomePageComponentComponent,
     SortPipe,
     FilterPipe,
+    HighscoresComponent,
   ],
   imports: [
     BrowserModule,
