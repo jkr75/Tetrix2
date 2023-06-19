@@ -4,21 +4,17 @@
     <td width="25%">Welcome to our Tetrix Game <br> {{playerInfo.Name.toLowerCase()}}!</td>
     <td width="25%">Point: {{pointCount}}</td>
     <td width="25%">Player scores:</td>
-
   </tr>
   <tr>
     <td>
-
       <button type="submit" *ngIf="!showS" class="gray" (click)="showGameplay()">Show Gameplay</button>
       <button type="submit" *ngIf="showS" class="gray" (click)="hideGameplay()">Hide Gameplay</button>
-
       <div *ngIf="!showS">
         <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="180" maxBufferPx="400" class="example-viewport">
           <div class="example-item-detail" *cdkVirtualFor="let item of saveCurrentGameData.gameHistory">{{item.Time}}s
             {{item.Action}}</div>
         </cdk-virtual-scroll-viewport>
       </div>
-
     </td>
     <td>
       <tetris-core #game (foodEaten)="onFoodEaten()" (gameOver)="onGameOver()"
@@ -48,14 +44,16 @@
       Aktualny czas: {{ currentTime | date: 'HH:mm:ss' }}
     </td>
     <td>
-      <div>
-      Filter: <input type="text" [(ngModel)]="searchText" placeholder="Wyszukaj...">
+      <!-- <div>
+      Filter: <input type="text" [(ngModel)]="searchText" placeholder="Wyszukaj..."><button (click)="toggleSortOrder()">Sort: {{ sortOrder === 'asc' ? 'asc' : 'desc' }}</button>
       <ul>
         <li *ngFor="let item of playerScores | filter: searchText | sort: sortOrder">
           {{ item.name }} - {{ item.score }}
         </li>
       </ul>
-      <button (click)="toggleSortOrder()">Sort: {{ sortOrder === 'asc' ? 'ascending' : 'descending' }}</button>
-    </div>
+    </div> -->
+      <div>
+        <app-highscores [scores]="scores"></app-highscores>
+      </div>
     </td>
 </table>

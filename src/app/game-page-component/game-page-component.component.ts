@@ -214,7 +214,7 @@ export class GamePageComponentComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    this.fetchPlayerScores();
     const playerData = this._playerDataService.getPlayerData();
     this.selectedColors = playerData?.selectedColors || 'normal_colors';
     this._route.params.subscribe(params => {
@@ -237,7 +237,7 @@ export class GamePageComponentComponent implements OnInit {
     }, 30000);
 
   }
-
+  scores: { name: string, score: string }[] = [];
   fetchPlayerScores() {
     const authToken = this._storage.getAuthToken();
     const httpOptions = {
@@ -254,6 +254,7 @@ export class GamePageComponentComponent implements OnInit {
         (response: { name: string, score: string }[]) => {
           const playerScores = response.filter(score => score.name );
           this.playerScores = playerScores;
+          this.scores = playerScores;
           this.sortScores();
           console.log('Player scores:', this.playerScores);
         },
@@ -263,6 +264,8 @@ export class GamePageComponentComponent implements OnInit {
         }
       );
   }
+  
+  
   
   sortScores() {
     if (this.sortOrder === 'asc') {
